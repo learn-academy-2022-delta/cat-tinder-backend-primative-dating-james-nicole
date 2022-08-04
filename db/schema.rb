@@ -14,6 +14,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_220346) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+ActiveRecord::Schema[7.0].define(version: 2022_08_04_203117) do
   create_table "monkeys", force: :cascade do |t|
     t.string "name"
     t.integer "age"
@@ -22,5 +23,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_220346) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
 end
