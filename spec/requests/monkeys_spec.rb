@@ -4,11 +4,12 @@ RSpec.describe "Monkeys", type: :request do
 	describe "GET /index" do
 		it "gets a list of monkeys" do
 			Monkey.create(
-        name: "Felipe",
-        age: 3,
-        enjoys: "Sunshine and warm spots",
-        image: "https://cdn.britannica.com/06/150806-050-6AE99C98/Proboscis-monkey.jpg?w=690&h=388&c=crop"
+				name: "Felipe",
+				age: 3,
+				enjoys: "Sunshine and warm spots",
+				image: "https://cdn.britannica.com/06/150806-050-6AE99C98/Proboscis-monkey.jpg?w=690&h=388&c=crop"
 			)
+
 			get '/monkeys'
 			monkey = JSON.parse(response.body)
 			expect(response).to have_http_status(200)
@@ -20,11 +21,11 @@ RSpec.describe "Monkeys", type: :request do
 		it "creates a monkey" do
 			monkey_params = {
 				monkey: {
-          name: "Felipe",
-          age: 3,
-          enjoys: "Sunshine and warm spots",
-          image: "https://cdn.britannica.com/06/150806-050-6AE99C98/Proboscis-monkey.jpg?w=690&h=388&c=crop"
-				}
+					name: "Felipe",
+					age: 3,
+					enjoys: "Sunshine and warm spots",
+					image: "https://cdn.britannica.com/06/150806-050-6AE99C98/Proboscis-monkey.jpg?w=690&h=388&c=crop"
+				}	
 			}
 
 			post '/monkeys', params: monkey_params
@@ -41,10 +42,10 @@ RSpec.describe "Monkeys", type: :request do
 		it "updates a monkey" do
 			monkey_params = {
 				monkey: {
-          name: "Felipe",
-          age: 3,
-          enjoys: "Sunshine and warm spots",
-          image: "https://cdn.britannica.com/06/150806-050-6AE99C98/Proboscis-monkey.jpg?w=690&h=388&c=crop"
+					name: "Felipe",
+					age: 3,
+					enjoys: "Sunshine and warm spots",
+					image: "https://cdn.britannica.com/06/150806-050-6AE99C98/Proboscis-monkey.jpg?w=690&h=388&c=crop"
 				}
 			}
 
@@ -52,12 +53,12 @@ RSpec.describe "Monkeys", type: :request do
 			monkey = Monkey.first
 			updated_monkey_params = {
 				monkey: {
-          name: "Felipe",
-          age: 4,
-          enjoys: "Sunshine and warm spots",
-          image: "https://cdn.britannica.com/06/150806-050-6AE99C98/Proboscis-monkey.jpg?w=690&h=388&c=crop"
-		}
-	}
+					name: "Felipe",
+					age: 4,
+					enjoys: "Sunshine and warm spots",
+					image: "https://cdn.britannica.com/06/150806-050-6AE99C98/Proboscis-monkey.jpg?w=690&h=388&c=crop"
+				}
+			}
 
 			patch "/monkeys/#{monkey.id}", params: updated_monkey_params
 			updated_monkey = Monkey.find(monkey.id)
@@ -70,11 +71,11 @@ RSpec.describe "Monkeys", type: :request do
 		it"deletes a monkey" do
 			monkey_params = {
 				monkey: {
-          name: "Felipe",
-          age: 3,
-          enjoys: "Sunshine and warm spots",
-          image: "https://cdn.britannica.com/06/150806-050-6AE99C98/Proboscis-monkey.jpg?w=690&h=388&c=crop"
-		    }
+					name: "Felipe",
+					age: 3,
+					enjoys: "Sunshine and warm spots",
+					image: "https://cdn.britannica.com/06/150806-050-6AE99C98/Proboscis-monkey.jpg?w=690&h=388&c=crop"
+		    	}
 			}
 
 			post "/monkeys", params: monkey_params
