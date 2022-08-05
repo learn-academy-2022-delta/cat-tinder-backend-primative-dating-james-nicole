@@ -90,7 +90,7 @@ RSpec.describe "Monkeys", type: :request do
 	end
 
 	describe "cannot create a monkey without valid attributes" do
-    it "doesn't create a monkey without a name" do
+    	it "doesn't create a monkey without a name" do
             monkey_params = {
                 monkey: {
                     age: 4,
@@ -105,7 +105,7 @@ RSpec.describe "Monkeys", type: :request do
             expect(monkey['name']).to include "can't be blank"
         end
 
-    it "doesn't create a monkey without an age" do
+    	it "doesn't create a monkey without an age" do
             monkey_params = {
                 monkey: {
                     name: 'Bertha',
@@ -119,14 +119,14 @@ RSpec.describe "Monkeys", type: :request do
             monkey = JSON.parse(response.body)
             expect(monkey['age']).to include "can't be blank"
         end
-	it "doesn't create a monkey without an enjoys" do
-		monkey_params = {
-			monkey: {
-				name: 'Bertha',
-                age: 4,
-				image: 'https://live.staticflickr.com/3946/15368916487_7063f08a82_b.jpg'
+		it "doesn't create a monkey without an enjoys" do
+			monkey_params = {
+				monkey: {
+					name: 'Bertha',
+					age: 4,
+					image: 'https://live.staticflickr.com/3946/15368916487_7063f08a82_b.jpg'
+				}
 			}
-		}
 
 			post '/monkeys', params: monkey_params
 			expect(response.status).to eq(422)
@@ -134,14 +134,14 @@ RSpec.describe "Monkeys", type: :request do
 			expect(monkey['enjoys']).to include "can't be blank"
 		end
 
-	it "doesn't create a monkey without an image" do
-		monkey_params = {
-			monkey: {
-				name: 'Bertha',
-                age: 4,
-                enjoys: 'banana splits'				
+		it "doesn't create a monkey without an image" do
+			monkey_params = {
+				monkey: {
+					name: 'Bertha',
+					age: 4,
+					enjoys: 'banana splits'				
+				}
 			}
-		}
 
 			post '/monkeys', params: monkey_params
 			expect(response.status).to eq(422)
