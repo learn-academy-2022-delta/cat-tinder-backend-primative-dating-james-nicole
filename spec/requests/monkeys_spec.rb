@@ -119,6 +119,7 @@ RSpec.describe "Monkeys", type: :request do
             monkey = JSON.parse(response.body)
             expect(monkey['age']).to include "can't be blank"
         end
+
 		it "doesn't create a monkey without an enjoys" do
 			monkey_params = {
 				monkey: {
