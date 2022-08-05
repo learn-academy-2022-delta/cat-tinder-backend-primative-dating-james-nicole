@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+#requests.spec
+
 RSpec.describe "Monkeys", type: :request do
 	describe "GET /index" do
 		it "gets a list of monkeys" do
@@ -84,6 +86,67 @@ RSpec.describe "Monkeys", type: :request do
 			expect(response).to have_http_status(200)
 			monkeys = Monkey.all
 			expect(monkeys).to be_empty
+		end
+	end
+
+	describe "cannot create a monkey without valid attributes" do
+    it "doesn't create a monkey without a name" do
+            monkey_params = {
+                monkey: {
+                    age: 4,
+                    enjoys: 'banana splits',
+                    image: 'https://live.staticflickr.com/3946/15368916487_7063f08a82_b.jpg'
+                }
+            }
+
+            post '/monkeys', params: monkey_params
+            expect(response.status).to eq(422)
+            monkey = JSON.parse(response.body)
+            expect(monkey['name']).to include "can't be blank"
+        end
+
+    it "doesn't create a monkey without an age" do
+            monkey_params = {
+                monkey: {
+                    name: 'Bertha',
+                    enjoys: 'banana splits',
+                    image: 'https://live.staticflickr.com/3946/15368916487_7063f08a82_b.jpg'
+                }
+            }
+
+            post '/monkeys', params: monkey_params
+            expect(response.status).to eq(422)
+            monkey = JSON.parse(response.body)
+            expect(monkey['age']).to include "can't be blank"
+        end
+	it "doesn't create a monkey without an enjoys" do
+		monkey_params = {
+			monkey: {
+				name: 'Bertha',
+                age: 4,
+				image: 'https://live.staticflickr.com/3946/15368916487_7063f08a82_b.jpg'
+			}
+		}
+
+			post '/monkeys', params: monkey_params
+			expect(response.status).to eq(422)
+			monkey = JSON.parse(response.body)
+			expect(monkey['enjoys']).to include "can't be blank"
+		end
+
+	it "doesn't create a monkey without an image" do
+		monkey_params = {
+			monkey: {
+				name: 'Bertha',
+                age: 4,
+                enjoys: 'banana splits'				
+			}
+		}
+
+			post '/monkeys', params: monkey_params
+			expect(response.status).to eq(422)
+			monkey = JSON.parse(response.body)
+			expect(monkey['image']).to include "can't be blank"
 		end
 	end
 end

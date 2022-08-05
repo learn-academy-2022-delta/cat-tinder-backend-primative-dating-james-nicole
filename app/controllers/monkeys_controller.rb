@@ -6,7 +6,11 @@ class MonkeysController < ApplicationController
 
 	def create
 		monkey = Monkey.create(monkey_params)
-		render json: monkey
+		if monkey.valid?
+			render json: monkey
+		else
+			render json: monkey.errors, status: 422 
+		end
 	end
 	
 	def update
